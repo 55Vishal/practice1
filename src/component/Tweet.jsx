@@ -3,21 +3,21 @@ import React, { useState } from "react";
 function Tweet() {
   const [active, setActive] = useState("");
   const [list, setList] = useState([]);
-
   function addTweet() {
     setList((item) => {
       const updatedList = [...item, active];
       console.log(updatedList);
       setActive("");
+      localStorage.setItem("list", JSON.stringify([updatedList]));
       return updatedList;
     });
   }
 
-  function removeTweet(index){
-     const updatedItem = list.filter((elem,id)=>{
-return index != id;
-     });
-     setList(updatedItem)
+  function removeTweet(index) {
+    const updatedItem = list.filter((elem, id) => {
+      return index != id;
+    });
+    setList(updatedItem);
   }
   return (
     <>
@@ -38,7 +38,7 @@ return index != id;
             <>
               <p key={index}>
                 <div> {data} </div>
-                <button onClick={()=> removeTweet(index) }>Delete tweet</button>
+                <button onClick={() => removeTweet(index)}>Delete tweet</button>
               </p>
             </>
           );
